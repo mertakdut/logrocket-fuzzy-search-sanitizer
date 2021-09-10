@@ -6,6 +6,8 @@ interface INetworkRequestResponse {
   headers: object;
 }
 
+// TODO: When there are submodules, product id will also be fed to LogRocket.identify.
+
 export default class LogrocketFuzzySearch {
   public static setup(fields: string[]) {
     const instance = new LogrocketFuzzySearch(fields);
@@ -89,6 +91,8 @@ export default class LogrocketFuzzySearch {
       }
     }
   }
+  
+  // TODO: Mask queryparams as well.
 
   private _mask(body: object, searchKeyName: string, maskKeyName?: string) {
     maskKeyName = maskKeyName || searchKeyName;
@@ -104,6 +108,6 @@ export default class LogrocketFuzzySearch {
     const { fields } = this;
     const normalizedKeyName = keyName.toLowerCase();
 
-    return fields.some((field) => normalizedKeyName.indexOf(field.toLowerCase()) > -1);
+    return fields.some((field) => normalizedKeyName.indexOf(field.toLowerCase()) > -1); // TODO: Exact match.
   }
 }
